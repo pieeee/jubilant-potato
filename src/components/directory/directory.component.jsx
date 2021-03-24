@@ -9,7 +9,11 @@ const Directory = () => {
   return (
     <Grid container spacing={2} className={classes.directory}>
       {menuItemList.map((menuItem) => (
-        <MenuItem title={menuItem.title} path={menuItem.path} />
+        <MenuItem
+          title={menuItem.title}
+          path={menuItem.path}
+          imgURL={menuItem.imgURL}
+        />
       ))}
     </Grid>
   )

@@ -1,7 +1,7 @@
 export const menuItemList = [
   {
     title: 'MONITOR',
-    path: '/',
+    path: 'monitor',
     imgURL:
       'https://res.cloudinary.com/piedev/image/upload/v1616611848/jubilant-potato/monitor_rvnwr7.jpg',
   },

@@ -20,6 +20,13 @@ export const useStyles = makeStyles((theme) => ({
     },
     '& .MuiCardActionArea-root': {
       height: '100%',
+      color: '#4d3ba56b',
+    },
+    position: 'relative',
+    transition: 'all .4s',
+    '&:hover': {
+      boxShadow: '0px 0px 22px 9px rgba(77, 59, 165,0.2)',
+      zIndex: 1,
     },
   },
   media: {

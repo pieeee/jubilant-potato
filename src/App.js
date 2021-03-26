@@ -8,7 +8,7 @@ function App() {
   const theme = createMuiTheme({
     palette: {
       primary: {
-        main: '#222831',
+        main: '#262239',
         light: '#393e46',
       },
       secondary: {

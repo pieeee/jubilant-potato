@@ -24,8 +24,14 @@ const CollectionItem = ({ items }) => {
                 <CardMedia className={classes.media} image={imageUrl} />
                 <CardContent className={classes.content}>
                   <div>
-                    <Typography variant="body2">{name}</Typography>
-                    <Typography variant="body2" className={classes.priceTag}>
+                    <Typography color="primary" variant="body2">
+                      {name}
+                    </Typography>
+                    <Typography
+                      color="primary"
+                      variant="body2"
+                      className={classes.priceTag}
+                    >
                       ${price}
                     </Typography>
                   </div>

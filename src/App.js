@@ -1,8 +1,10 @@
 import React from 'react'
 import { Route, Switch } from 'react-router-dom'
+import { createMuiTheme, CssBaseline, ThemeProvider } from '@material-ui/core'
+
 import HomePage from './pages/home-page'
 import ShopPage from './pages/shop-page'
-import { createMuiTheme, CssBaseline, ThemeProvider } from '@material-ui/core'
+import Header from './components/header/header.component'
 
 function App() {
   const theme = createMuiTheme({
@@ -12,12 +14,9 @@ function App() {
         light: '#393e46',
       },
       secondary: {
-        main: '#f83245',
+        main: '#FFFFFF',
         light: '#f8324526',
       },
-      //   background: {
-      //     default: '#f4f5fd',
-      //   },
     },
     overrides: {
       MuiAppBar: {
@@ -26,14 +25,11 @@ function App() {
         },
       },
     },
-    props: {
-      MuiIconButton: {
-        disableRipple: true,
-      },
-    },
   })
   return (
     <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <Header />
       <Switch>
         <Route exact path="/" component={HomePage} />
         <Route path="/shop" component={ShopPage} />

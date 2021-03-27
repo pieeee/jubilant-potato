@@ -25,6 +25,7 @@ export const useStyles = makeStyles((theme) => ({
     position: 'relative',
     transition: 'all .4s',
     '&:hover': {
+    //   transform: 'scale(1.1)',
       boxShadow: '0px 0px 22px 9px rgba(77, 59, 165,0.2)',
       zIndex: 1,
     },

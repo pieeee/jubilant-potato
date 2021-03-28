@@ -1,7 +1,7 @@
 import { Typography, Box, Link } from '@material-ui/core'
 import React from 'react'
-import CollectionItem from '../collection-items'
-import { useStyles } from './styles'
+import CollectionItem from '../collection-items/collectionItem.component'
+import { useStyles } from './collectionPreview.styles'
 
 const CollectionPreview = ({ title, items }) => {
   const classes = useStyles()

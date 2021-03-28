@@ -1,8 +1,8 @@
 import { Container } from '@material-ui/core'
 import React from 'react'
-import CollectionPreview from '../../components/collection-preview'
-import { SHOP_DATA } from './meta'
-import { useStyles } from './styles'
+import CollectionPreview from '../../components/collection-preview/collectionPreview.component'
+import { SHOP_DATA } from './shop.data'
+import { useStyles } from './shop.styles'
 
 const ShopPage = () => {
   const classes = useStyles()

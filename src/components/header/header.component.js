@@ -36,12 +36,8 @@ const Header = (props) => {
 
   return (
     <>
-      <Drawer
-        anchor="left"
-        open={drawerState}
-        onClose={toggleDrawer(false)}
-      >
-        <DrawerItem />
+      <Drawer anchor="left" open={drawerState} onClose={toggleDrawer(false)}>
+        <DrawerItem toggleDrawer={toggleDrawer()} />
       </Drawer>
       <HideOnScroll {...props}>
         <AppBar position="sticky" color="primary">
@@ -66,16 +62,16 @@ const Header = (props) => {
             <Box>
               <Button
                 color="secondary"
-                className={
-                  location.pathname === '/shop' && classes.buttonSelected
-                }
+                className={clsx(classes.navButton, {
+                  [classes.buttonSelected]: location.pathname === '/shop',
+                })}
                 onClick={() => history.push('/shop')}
               >
                 Shop
               </Button>
               <Button
                 color="secondary"
-                className={clsx({
+                className={clsx(classes.navButton, {
                   [classes.buttonSelected]: location.pathname === '/contact',
                 })}
                 onClick={() => history.push('/contact')}

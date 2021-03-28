@@ -9,7 +9,7 @@ import {
   Button,
 } from '@material-ui/core'
 
-import { useStyles } from './styles'
+import { useStyles } from './collectionItem.styles'
 
 const CollectionItem = ({ items }) => {
   const classes = useStyles()

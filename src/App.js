@@ -2,8 +2,8 @@ import React from 'react'
 import { Route, Switch } from 'react-router-dom'
 import { createMuiTheme, CssBaseline, ThemeProvider } from '@material-ui/core'
 
-import HomePage from './pages/home-page'
-import ShopPage from './pages/shop-page'
+import HomePage from './pages/home-page/home.page'
+import ShopPage from './pages/shop-page/shop.page'
 import Header from './components/header/header.component'
 
 function App() {

@@ -1,7 +1,7 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom'
 import { Grid, Typography } from '@material-ui/core'
-import { useStyles } from './styles'
+import { useStyles } from './menuItem.styles'
 
 const MenuItem = ({ title, path, imgURL, match, history }) => {
   const classes = useStyles()

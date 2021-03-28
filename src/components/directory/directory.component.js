@@ -1,8 +1,8 @@
 import React from 'react'
 import { Grid } from '@material-ui/core'
-import { menuItemList } from './meta'
-import { useStyles } from './styles'
-import MenuItem from '../menu-item'
+import { menuItemList } from './directory.data'
+import { useStyles } from './directory.styles'
+import MenuItem from '../menu-item/menuItem.component'
 
 const Directory = () => {
   const classes = useStyles()

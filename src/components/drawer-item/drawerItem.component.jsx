@@ -8,12 +8,19 @@ import items from './drawerItem.data'
 
 const DrawerItem = (props) => {
   const classes = useStyles()
-  const { location, history } = props
+  const { location, history, toggleDrawer } = props
   return (
     <div className={classes.list}>
       <List>
         {items.map(({ name, path, Icon }, idx) => (
-          <ListItem button key={idx} onClick={() => history.push(path)}>
+          <ListItem
+            button
+            key={idx}
+            onClick={() => {
+              history.push(path)
+              toggleDrawer(false)
+            }}
+          >
             <ListItemIcon>
               <Icon />
             </ListItemIcon>

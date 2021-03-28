@@ -1,6 +1,7 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom'
 import { List, ListItem, ListItemIcon, ListItemText } from '@material-ui/core'
+import clsx from 'clsx'
 
 import { useStyles } from './drawerItem.styles'
 
@@ -20,11 +21,14 @@ const DrawerItem = (props) => {
               history.push(path)
               toggleDrawer(false)
             }}
+            className={clsx(classes.listItemButton, {
+              [classes.listItemButtonSelected]: location.pathname === path,
+            })}
           >
             <ListItemIcon>
-              <Icon />
+              <Icon color="primary" />
             </ListItemIcon>
-            <ListItemText primary={name} />
+            <ListItemText primary={name} color="primary" />
           </ListItem>
         ))}
       </List>

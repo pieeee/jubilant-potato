@@ -16,6 +16,7 @@ import { withRouter } from 'react-router-dom'
 
 import HideOnScroll from './hideOnScroll'
 import DrawerItem from '../drawer-item/drawerItem.component'
+import navMenus from './header.data'
 
 const Header = (props) => {
   // global
@@ -60,24 +61,18 @@ const Header = (props) => {
             </Typography>
 
             <Box>
-              <Button
-                color="secondary"
-                className={clsx(classes.navButton, {
-                  [classes.buttonSelected]: location.pathname === '/shop',
-                })}
-                onClick={() => history.push('/shop')}
-              >
-                Shop
-              </Button>
-              <Button
-                color="secondary"
-                className={clsx(classes.navButton, {
-                  [classes.buttonSelected]: location.pathname === '/contact',
-                })}
-                onClick={() => history.push('/contact')}
-              >
-                Contact
-              </Button>
+              {navMenus.map(({ name, path }, idx) => (
+                <Button
+                  color="secondary"
+                  className={clsx(classes.navButton, {
+                    [classes.buttonSelected]: location.pathname === path,
+                  })}
+                  onClick={() => history.push(path)}
+                  key={idx}
+                >
+                  {name}
+                </Button>
+              ))}
             </Box>
           </Container>
         </AppBar>

@@ -4,8 +4,7 @@ import { List, ListItem, ListItemIcon, ListItemText } from '@material-ui/core'
 import clsx from 'clsx'
 
 import { useStyles } from './drawerItem.styles'
-
-import items from './drawerItem.data'
+import navMenus from '../header/header.data'
 
 const DrawerItem = (props) => {
   const classes = useStyles()
@@ -13,7 +12,7 @@ const DrawerItem = (props) => {
   return (
     <div className={classes.list}>
       <List>
-        {items.map(({ name, path, Icon }, idx) => (
+        {navMenus.map(({ name, path, Icon }, idx) => (
           <ListItem
             button
             key={idx}

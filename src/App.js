@@ -4,6 +4,8 @@ import { createMuiTheme, CssBaseline, ThemeProvider } from '@material-ui/core'
 
 import HomePage from './pages/home-page/home.page'
 import ShopPage from './pages/shop-page/shop.page'
+import Authentication from './pages/auth-page/auth.page'
+
 import Header from './components/header/header.component'
 
 function App() {
@@ -33,6 +35,7 @@ function App() {
       <Switch>
         <Route exact path="/" component={HomePage} />
         <Route path="/shop" component={ShopPage} />
+        <Route path="/signin" component={Authentication} />
       </Switch>
     </ThemeProvider>
   )

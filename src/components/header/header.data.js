@@ -1,9 +1,8 @@
 import LocalMallIcon from '@material-ui/icons/LocalMall'
 import PermContactCalendarIcon from '@material-ui/icons/PermContactCalendar'
+import ExitToAppIcon from '@material-ui/icons/ExitToApp'
 
-
-
-const items = [
+const navMenus = [
   {
     name: 'Shop',
     path: '/shop',
@@ -14,6 +13,11 @@ const items = [
     path: '/contact',
     Icon: PermContactCalendarIcon,
   },
+  {
+    name: 'Signin',
+    path: '/signin',
+    Icon: ExitToAppIcon,
+  },
 ]
 
-export default items
+export default navMenus

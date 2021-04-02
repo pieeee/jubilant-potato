@@ -20,6 +20,15 @@ function App() {
         light: '#f8324526',
       },
     },
+    breakpoints: {
+      values: {
+        xs: 0,
+        sm: 540,
+        md: 960,
+        lg: 1280,
+        xl: 1920,
+      },
+    },
     overrides: {
       MuiAppBar: {
         root: {

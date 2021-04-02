@@ -1,8 +1,15 @@
 import React from 'react'
-import { Typography, TextField, FormControl, Button } from '@material-ui/core'
+import {
+  Typography,
+  TextField,
+  FormControl,
+  Button,
+  Grid,
+} from '@material-ui/core'
+import { ReactComponent as GoogleIcons } from './google.svg'
 import { useForm, Controller } from 'react-hook-form'
 
-import { useStyles } from './signin.styles'
+import { useStyles } from './auth-component.styles'
 
 const Signin = () => {
   const classes = useStyles()
@@ -73,16 +80,31 @@ const Signin = () => {
             rules={{
               required: 'You must enter a password',
               minLength: {
-                value: 8,
-                message: 'Password required to be minimum 8 character',
+                value: 6,
+                message: 'Password required to be minimum 6 character',
               },
             }}
           />
         </FormControl>
 
-        <Button type="submit" color="primary" variant="contained">
-          Signin
-        </Button>
+        <Grid container spacing={2}>
+          <Grid item xs={12} md={6}>
+            <Button type="submit" color="primary" variant="contained" fullWidth>
+              Signin
+            </Button>
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <Button
+              type="submit"
+              color="primary"
+              variant="contained"
+              fullWidth
+              startIcon={<GoogleIcons />}
+            >
+              Signin With Google
+            </Button>
+          </Grid>
+        </Grid>
       </form>
     </div>
   )

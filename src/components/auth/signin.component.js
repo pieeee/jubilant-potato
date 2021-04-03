@@ -5,13 +5,14 @@ import {
   FormControl,
   Button,
   Grid,
+  Link,
 } from '@material-ui/core'
 import { ReactComponent as GoogleIcons } from './google.svg'
 import { useForm, Controller } from 'react-hook-form'
 
 import { useStyles } from './auth-component.styles'
 
-const Signin = () => {
+const Signin = (props) => {
   const classes = useStyles()
   const { control, errors: fieldsErrors, handleSubmit, reset } = useForm()
 
@@ -87,7 +88,14 @@ const Signin = () => {
           />
         </FormControl>
 
-        <Grid container spacing={2}>
+        {props.redirectLink && (
+          <Link onClick={() => props.onSwitchComponent()}>
+            {' '}
+            {`Don't have an account? Create one.`}{' '}
+          </Link>
+        )}
+
+        <Grid container spacing={2} className={classes.formButtons}>
           <Grid item xs={12} md={6}>
             <Button type="submit" color="primary" variant="contained" fullWidth>
               Signin

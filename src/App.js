@@ -35,17 +35,22 @@ function App() {
           transform: 'translateZ(0)',
         },
       },
+      MuiLink: {
+        root: {
+          cursor: 'pointer',
+        },
+      },
     },
   })
   return (
     <ThemeProvider theme={theme}>
-      <CssBaseline />
       <Header />
       <Switch>
         <Route exact path="/" component={HomePage} />
         <Route path="/shop" component={ShopPage} />
         <Route path="/signin" component={Authentication} />
       </Switch>
+      <CssBaseline />
     </ThemeProvider>
   )
 }

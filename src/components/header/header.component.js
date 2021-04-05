@@ -57,7 +57,7 @@ const Header = (props) => {
               className={classes.title}
               onClick={() => history.push('/')}
             >
-              Crispy
+              Jubilant
             </Typography>
 
             <Box>

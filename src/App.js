@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Route, Switch } from 'react-router-dom'
 import { createMuiTheme, CssBaseline, ThemeProvider } from '@material-ui/core'
+import { auth } from './firebase/firebase.utils'
 
 import HomePage from './pages/home-page/home.page'
 import ShopPage from './pages/shop-page/shop.page'
@@ -8,40 +9,22 @@ import Authentication from './pages/auth-page/auth.page'
 
 import Header from './components/header/header.component'
 
+import { customConfig } from './mui.custom'
+
 function App() {
-  const theme = createMuiTheme({
-    palette: {
-      primary: {
-        main: '#262239',
-        light: '#f1f5ff',
-      },
-      secondary: {
-        main: '#FFFFFF',
-        light: '#f8324526',
-      },
-    },
-    breakpoints: {
-      values: {
-        xs: 0,
-        sm: 540,
-        md: 960,
-        lg: 1280,
-        xl: 1920,
-      },
-    },
-    overrides: {
-      MuiAppBar: {
-        root: {
-          transform: 'translateZ(0)',
-        },
-      },
-      MuiLink: {
-        root: {
-          cursor: 'pointer',
-        },
-      },
-    },
+  const [state, setstate] = useState({
+    currentUser: null,
   })
+
+  const theme = createMuiTheme(customConfig)
+
+  useEffect(() => {
+    auth.onAuthStateChanged((user) => {
+      setstate({ currentUser: user })
+    })
+    console.log(state.currentUser)
+  }, [])
+
   return (
     <ThemeProvider theme={theme}>
       <Header />

@@ -10,6 +10,7 @@
     "@testing-library/user-event": "^12.1.10",
     "eslint": "^7.22.0",
     "eslint-plugin-react": "^7.23.1",
+    "firebase": "^8.3.2",
     "jss-plugin-nested": "^10.6.0",
     "node-sass": "^5.0.0",
     "react": "^17.0.1",

@@ -9,7 +9,7 @@ import {
 } from '@material-ui/core'
 import { ReactComponent as GoogleIcons } from './google.svg'
 import { useForm, Controller } from 'react-hook-form'
-
+import { signinWithGoogle } from '../../firebase/firebase.utils'
 import { useStyles } from './auth-component.styles'
 
 const Signin = (props) => {
@@ -103,11 +103,12 @@ const Signin = (props) => {
           </Grid>
           <Grid item xs={12} md={6}>
             <Button
-              type="submit"
               color="primary"
               variant="contained"
               fullWidth
-              startIcon={<GoogleIcons />}
+                          startIcon={<GoogleIcons />}
+                          
+                          onClick = {signinWithGoogle}
             >
               Signin With Google
             </Button>

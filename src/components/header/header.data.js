@@ -1,6 +1,7 @@
 import LocalMallIcon from '@material-ui/icons/LocalMall'
 import PermContactCalendarIcon from '@material-ui/icons/PermContactCalendar'
 import ExitToAppIcon from '@material-ui/icons/ExitToApp'
+import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew'
 
 const navMenus = [
   {
@@ -17,6 +18,11 @@ const navMenus = [
     name: 'Signin',
     path: '/signin',
     Icon: ExitToAppIcon,
+  },
+  {
+    name: 'Signout',
+    path: '',
+    Icon: PowerSettingsNewIcon,
   },
 ]
 

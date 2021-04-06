@@ -22,12 +22,11 @@ function App() {
     auth.onAuthStateChanged((user) => {
       setstate({ currentUser: user })
     })
-    console.log(state.currentUser)
   }, [])
 
   return (
     <ThemeProvider theme={theme}>
-      <Header />
+      <Header currentUser={state.currentUser} />
       <Switch>
         <Route exact path="/" component={HomePage} />
         <Route path="/shop" component={ShopPage} />

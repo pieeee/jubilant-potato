@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import {
   AppBar,
   Container,
-  Toolbar,
   Typography,
   IconButton,
   Box,
@@ -18,10 +17,18 @@ import HideOnScroll from './hideOnScroll'
 import DrawerItem from '../drawer-item/drawerItem.component'
 import navMenus from './header.data'
 
+import { auth } from '../../firebase/firebase.utils'
+
 const Header = (props) => {
+  // component state
+
   // global
   const { location, history } = props
   const classes = useStyles()
+
+  const onSignout = () => {
+    auth.signOut()
+  }
 
   // drawer
   const [drawerState, setDrawerState] = useState(false)
@@ -38,7 +45,11 @@ const Header = (props) => {
   return (
     <>
       <Drawer anchor="left" open={drawerState} onClose={toggleDrawer(false)}>
-        <DrawerItem toggleDrawer={toggleDrawer()} />
+        <DrawerItem
+          toggleDrawer={toggleDrawer()}
+          currentUser={props.currentUser}
+          onSignout={onSignout}
+        />
       </Drawer>
       <HideOnScroll {...props}>
         <AppBar position="sticky" color="primary">
@@ -61,18 +72,28 @@ const Header = (props) => {
             </Typography>
 
             <Box>
-              {navMenus.map(({ name, path }, idx) => (
-                <Button
-                  color="secondary"
-                  className={clsx(classes.navButton, {
-                    [classes.buttonSelected]: location.pathname === path,
-                  })}
-                  onClick={() => history.push(path)}
-                  key={idx}
-                >
-                  {name}
-                </Button>
-              ))}
+              {navMenus
+                .filter(
+                  props.currentUser
+                    ? ({ name }) => name !== 'Signin'
+                    : ({ name }) => name !== 'Signout'
+                )
+                .map(({ name, path }, idx) => (
+                  <Button
+                    color="secondary"
+                    className={clsx(classes.navButton, {
+                      [classes.buttonSelected]: location.pathname === path,
+                    })}
+                    onClick={
+                      name !== 'Signout'
+                        ? () => history.push(path)
+                        : () => onSignout()
+                    }
+                    key={idx}
+                  >
+                    {name}
+                  </Button>
+                ))}
             </Box>
           </Container>
         </AppBar>

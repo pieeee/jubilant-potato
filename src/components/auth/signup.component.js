@@ -9,6 +9,7 @@ import {
 } from '@material-ui/core'
 import { ReactComponent as GoogleIcons } from './google.svg'
 import { useForm, Controller } from 'react-hook-form'
+import { auth, createUserProfileDocument } from '../../firebase/firebase.utils'
 
 import { useStyles } from './auth-component.styles'
 
@@ -28,9 +29,21 @@ const Signup = (props) => {
 
   // form on submit
   const onSubmit = async (data) => {
-    console.log(data)
+    const { displayName, email, password } = data
+    console.log(displayName)
+    try {
+      const { user } = await auth.createUserWithEmailAndPassword(
+        email,
+        password
+      )
+
+      await createUserProfileDocument(user, { displayName })
+    } catch (error) {
+      console.log(error)
+    }
     reset()
   }
+
   return (
     <div>
       <Typography variant="h4" color="primary">

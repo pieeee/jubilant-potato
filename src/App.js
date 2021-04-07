@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Route, Switch } from 'react-router-dom'
 import { createMuiTheme, CssBaseline, ThemeProvider } from '@material-ui/core'
-import { auth } from './firebase/firebase.utils'
+import { auth, createUserProfileDocument } from './firebase/firebase.utils'
 
 import HomePage from './pages/home-page/home.page'
 import ShopPage from './pages/shop-page/shop.page'
@@ -12,17 +12,31 @@ import Header from './components/header/header.component'
 import { customConfig } from './mui.custom'
 
 function App() {
-  const [state, setstate] = useState({
+  const [state, setState] = useState({
     currentUser: null,
   })
 
   const theme = createMuiTheme(customConfig)
 
   useEffect(() => {
-    auth.onAuthStateChanged((user) => {
-      setstate({ currentUser: user })
+    auth.onAuthStateChanged(async (userAuth) => {
+      const userRef = await createUserProfileDocument(userAuth)
+      if (userRef) {
+        userRef.onSnapshot((snapShot) => {
+          setState({
+            currentUser: {
+              id: snapShot.id,
+              ...snapShot.data(),
+            },
+          })
+        })
+      } else {
+        setState({ currentUser: userAuth })
+      }
     })
   }, [])
+
+  console.log(state)
 
   return (
     <ThemeProvider theme={theme}>

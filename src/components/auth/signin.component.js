@@ -9,7 +9,7 @@ import {
 } from '@material-ui/core'
 import { ReactComponent as GoogleIcons } from './google.svg'
 import { useForm, Controller } from 'react-hook-form'
-import { signinWithGoogle } from '../../firebase/firebase.utils'
+import { signinWithGoogle, auth } from '../../firebase/firebase.utils'
 import { useStyles } from './auth-component.styles'
 
 const Signin = (props) => {
@@ -17,10 +17,11 @@ const Signin = (props) => {
   const { control, errors: fieldsErrors, handleSubmit, reset } = useForm()
 
   // form on submit
-  const onSubmit = async (data) => {
-    console.log(data)
+  const onSubmit = async ({ email, password }) => {
+    await auth.signInWithEmailAndPassword(email, password)
     reset()
   }
+
   return (
     <div>
       <Typography variant="h4" color="primary">
@@ -106,9 +107,8 @@ const Signin = (props) => {
               color="primary"
               variant="contained"
               fullWidth
-                          startIcon={<GoogleIcons />}
-                          
-                          onClick = {signinWithGoogle}
+              startIcon={<GoogleIcons />}
+              onClick={signinWithGoogle}
             >
               Signin With Google
             </Button>

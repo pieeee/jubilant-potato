@@ -7,7 +7,6 @@ export const useStyles = makeStyles((theme) => ({
     justifyContent: 'space-between',
 
     '& .MuiBox-root': {
-      display: 'block',
       [theme.breakpoints.down('sm')]: {
         display: 'none',
       },

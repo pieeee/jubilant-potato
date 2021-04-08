@@ -26,9 +26,12 @@ const DrawerItem = (props) => {
                 name !== 'Signout'
                   ? () => {
                       history.push(path)
-                      toggleDrawer(false)
+                      toggleDrawer(false, 'left')
                     }
-                  : () => props.onSignout()
+                  : () => {
+                      props.onSignout()
+                      toggleDrawer(false, 'left')
+                    }
               }
               className={clsx(classes.listItemButton, {
                 [classes.listItemButtonSelected]: location.pathname === path,

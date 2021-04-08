@@ -8,18 +8,22 @@ import {
   Button,
   Drawer,
 } from '@material-ui/core'
+import withWidth, { isWidthDown, isWidthUp } from '@material-ui/core/withWidth'
 import MenuIcon from '@material-ui/icons/Menu'
 import clsx from 'clsx'
 
 import { useStyles } from './header.styles'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
+import { setDrawerOpen } from '../../redux/drawer/drawer.actions'
 
 import HideOnScroll from './hideOnScroll'
 import DrawerItem from '../drawer-item/drawerItem.component'
 import navMenus from './header.data'
+import CartIcon from '../cart-icon/cartIcon.component'
 
 import { auth } from '../../firebase/firebase.utils'
+import CartDropDown from '../cart-drawer/cartDrawer.component'
 
 const Header = (props) => {
   // component state
@@ -33,26 +37,41 @@ const Header = (props) => {
   }
 
   // drawer
-  const [drawerState, setDrawerState] = useState(false)
-  const toggleDrawer = (open) => (event) => {
+  const toggleDrawer = (state, side) => (event) => {
     if (
       event.type === 'keydown' &&
       (event.key === 'Tab' || event.key === 'Shift')
     ) {
       return
     }
-    setDrawerState(open)
+
+    props.setDrawerOpen({ state, side })
   }
 
   return (
     <>
-      <Drawer anchor="left" open={drawerState} onClose={toggleDrawer(false)}>
+      <Drawer
+        anchor="left"
+        open={props.drawerOpen.side === 'left' ? props.drawerOpen.state : false}
+        onClose={toggleDrawer(false, 'left')}
+      >
         <DrawerItem
           toggleDrawer={toggleDrawer()}
           currentUser={props.currentUser}
           onSignout={onSignout}
         />
       </Drawer>
+
+      <Drawer
+        anchor="right"
+        open={
+          props.drawerOpen.side === 'right' ? props.drawerOpen.state : false
+        }
+        onClose={toggleDrawer(false, 'right')}
+      >
+        <CartDropDown toggleDrawer={toggleDrawer()} />
+      </Drawer>
+
       <HideOnScroll {...props}>
         <AppBar position="sticky" color="primary">
           <Container className={classes.root}>
@@ -61,7 +80,7 @@ const Header = (props) => {
               className={classes.menuButton}
               color="secondary"
               aria-label="menu"
-              onClick={toggleDrawer(true)}
+              onClick={toggleDrawer(true, 'left')}
             >
               <MenuIcon />
             </IconButton>
@@ -73,7 +92,7 @@ const Header = (props) => {
               Jubilant
             </Typography>
 
-            <Box>
+            <Box display="flex" alignItems="center">
               {navMenus
                 .filter(
                   props.currentUser
@@ -96,7 +115,9 @@ const Header = (props) => {
                     {name}
                   </Button>
                 ))}
+              <CartIcon />
             </Box>
+            {isWidthDown('sm', props.width) && <CartIcon />}
           </Container>
         </AppBar>
       </HideOnScroll>
@@ -104,8 +125,13 @@ const Header = (props) => {
   )
 }
 
-const mapStateToProps = state => ({
-    currentUser: state.user.currentUser
+const mapDispatchToProps = (dispatch) => ({
+  setDrawerOpen: (open) => dispatch(setDrawerOpen(open)),
 })
 
-export default withRouter(connect(mapStateToProps)(Header))
+const mapStateToProps = (state) => ({
+  currentUser: state.user.currentUser,
+  drawerOpen: state.drawer.drawerOpen,
+})
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(withWidth()(Header)))

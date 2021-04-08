@@ -7,7 +7,6 @@ import {
   Grid,
   Link,
 } from '@material-ui/core'
-import { ReactComponent as GoogleIcons } from './google.svg'
 import { useForm, Controller } from 'react-hook-form'
 import { auth, createUserProfileDocument } from '../../firebase/firebase.utils'
 

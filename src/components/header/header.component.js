@@ -8,10 +8,12 @@ import {
   Button,
   Drawer,
 } from '@material-ui/core'
-import clsx from 'clsx'
 import MenuIcon from '@material-ui/icons/Menu'
+import clsx from 'clsx'
+
 import { useStyles } from './header.styles'
 import { withRouter } from 'react-router-dom'
+import { connect } from 'react-redux'
 
 import HideOnScroll from './hideOnScroll'
 import DrawerItem from '../drawer-item/drawerItem.component'
@@ -102,4 +104,8 @@ const Header = (props) => {
   )
 }
 
-export default withRouter(Header)
+const mapStateToProps = state => ({
+    currentUser: state.user.currentUser
+})
+
+export default withRouter(connect(mapStateToProps)(Header))

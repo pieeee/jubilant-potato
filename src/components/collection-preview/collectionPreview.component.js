@@ -1,4 +1,4 @@
-import { Typography, Box, Link } from '@material-ui/core'
+import { Typography, Box, Link, Grid } from '@material-ui/core'
 import React from 'react'
 import CollectionItem from '../collection-items/collectionItem.component'
 import { useStyles } from './collectionPreview.styles'
@@ -15,7 +15,15 @@ const CollectionPreview = ({ title, items }) => {
         <Typography variant="h5">{title.toUpperCase()}</Typography>
         <Link href="#">See All</Link>
       </Box>
-      <CollectionItem items={items} />
+      <Grid container spacing={2}>
+        {items
+          .filter(({}, idx) => idx < 4)
+          .map((item) => (
+            <Grid item key={item.id} xs={12} sm={6} md={3}>
+              <CollectionItem item={item} />
+            </Grid>
+          ))}
+      </Grid>
     </div>
   )
 }

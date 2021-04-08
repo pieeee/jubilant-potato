@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import { Route, Switch } from 'react-router-dom'
+import React, { useEffect } from 'react'
+import { Route, Switch, Redirect } from 'react-router-dom'
 import { createMuiTheme, CssBaseline, ThemeProvider } from '@material-ui/core'
 import { auth, createUserProfileDocument } from './firebase/firebase.utils'
 import { connect } from 'react-redux'
@@ -14,7 +14,7 @@ import Header from './components/header/header.component'
 import { customConfig } from './mui.custom'
 
 function App(props) {
-  const { setCurrentUser } = props
+  const { setCurrentUser, currentUser } = props
 
   const theme = createMuiTheme(customConfig)
 
@@ -40,15 +40,25 @@ function App(props) {
       <Switch>
         <Route exact path="/" component={HomePage} />
         <Route path="/shop" component={ShopPage} />
-        <Route path="/signin" component={Authentication} />
+        <Route
+          exact
+          path="/signin"
+          render={() =>
+            currentUser ? <Redirect to="/" /> : <Authentication />
+          }
+        />
       </Switch>
       <CssBaseline />
     </ThemeProvider>
   )
 }
 
+const mapStateToProps = ({ user }) => ({
+  currentUser: user.currentUser,
+})
+
 const mapDispatchToProps = (dispatch) => ({
   setCurrentUser: (user) => dispatch(setCurrentUser(user)),
 })
 
-export default connect(null, mapDispatchToProps)(App)
+export default connect(mapStateToProps, mapDispatchToProps)(App)

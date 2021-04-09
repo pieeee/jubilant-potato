@@ -1,7 +1,7 @@
 import { makeStyles } from '@material-ui/core'
 
 export const useStyles = makeStyles((theme) => ({
-  dropDownRoot: {
+  cartContainer: {
     display: 'flex',
     flexDirection: 'column',
     width: '240px',
@@ -25,5 +25,9 @@ export const useStyles = makeStyles((theme) => ({
     bottom: 0,
     borderRadius: 0,
     padding: theme.spacing(2),
+  },
+  root: {
+    overflowY: 'auto',
+    maxHeight: '88vh',
   },
 }))

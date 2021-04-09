@@ -72,55 +72,53 @@ const Header = (props) => {
         <CartDropDown toggleDrawer={toggleDrawer()} />
       </Drawer>
 
-      <HideOnScroll {...props}>
-        <AppBar position="sticky" color="primary">
-          <Container className={classes.root}>
-            <IconButton
-              edge="start"
-              className={classes.menuButton}
-              color="secondary"
-              aria-label="menu"
-              onClick={toggleDrawer(true, 'left')}
-            >
-              <MenuIcon />
-            </IconButton>
-            <Typography
-              variant="h6"
-              className={classes.title}
-              onClick={() => history.push('/')}
-            >
-              Jubilant
-            </Typography>
+      <AppBar position="sticky" color="primary">
+        <Container className={classes.root}>
+          <IconButton
+            edge="start"
+            className={classes.menuButton}
+            color="secondary"
+            aria-label="menu"
+            onClick={toggleDrawer(true, 'left')}
+          >
+            <MenuIcon />
+          </IconButton>
+          <Typography
+            variant="h6"
+            className={classes.title}
+            onClick={() => history.push('/')}
+          >
+            Jubilant
+          </Typography>
 
-            <Box display="flex" alignItems="center">
-              {navMenus
-                .filter(
-                  props.currentUser
-                    ? ({ name }) => name !== 'Signin'
-                    : ({ name }) => name !== 'Signout'
-                )
-                .map(({ name, path }, idx) => (
-                  <Button
-                    color="secondary"
-                    className={clsx(classes.navButton, {
-                      [classes.buttonSelected]: location.pathname === path,
-                    })}
-                    onClick={
-                      name !== 'Signout'
-                        ? () => history.push(path)
-                        : () => onSignout()
-                    }
-                    key={idx}
-                  >
-                    {name}
-                  </Button>
-                ))}
-              <CartIcon />
-            </Box>
-            {isWidthDown('sm', props.width) && <CartIcon />}
-          </Container>
-        </AppBar>
-      </HideOnScroll>
+          <Box display="flex" alignItems="center">
+            {navMenus
+              .filter(
+                props.currentUser
+                  ? ({ name }) => name !== 'Signin'
+                  : ({ name }) => name !== 'Signout'
+              )
+              .map(({ name, path }, idx) => (
+                <Button
+                  color="secondary"
+                  className={clsx(classes.navButton, {
+                    [classes.buttonSelected]: location.pathname === path,
+                  })}
+                  onClick={
+                    name !== 'Signout'
+                      ? () => history.push(path)
+                      : () => onSignout()
+                  }
+                  key={idx}
+                >
+                  {name}
+                </Button>
+              ))}
+            <CartIcon />
+          </Box>
+          {isWidthDown('sm', props.width) && <CartIcon />}
+        </Container>
+      </AppBar>
     </>
   )
 }

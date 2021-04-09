@@ -4,6 +4,7 @@ import { setDrawerOpen } from '../../redux/drawer/drawer.actions'
 
 import { Badge, IconButton } from '@material-ui/core'
 import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined'
+import { selectCartItemsCount } from '../../redux/cart/cart.selectors'
 
 const CartIcon = (props) => {
   return (
@@ -13,7 +14,7 @@ const CartIcon = (props) => {
         color="secondary"
         onClick={() => props.setDrawerOpen({ state: true, side: 'right' })}
       >
-        <Badge badgeContent={4} color="secondary">
+        <Badge badgeContent={props.itemCount} color="secondary">
           <ShoppingCartOutlinedIcon fontSize="inherit" />
         </Badge>
       </IconButton>
@@ -21,9 +22,13 @@ const CartIcon = (props) => {
   )
 }
 
+const mapStateToProps = (state) => ({
+  itemCount: selectCartItemsCount(state),
+})
+
 const mapDispatchToProps = (dispatch) => ({
   setDrawerOpen: (open) => dispatch(setDrawerOpen(open)),
 })
 
 
-export default connect(null, mapDispatchToProps)(CartIcon)
+export default connect(mapStateToProps, mapDispatchToProps)(CartIcon)

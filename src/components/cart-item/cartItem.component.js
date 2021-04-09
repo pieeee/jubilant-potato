@@ -1,7 +1,7 @@
 import React from 'react'
 import {
   Avatar,
-    IconButton,
+  IconButton,
   ListItem,
   ListItemAvatar,
   ListItemSecondaryAction,
@@ -24,7 +24,7 @@ const CartItem = ({ item: { name, imageUrl, price, quantity } }) => {
         secondary={`${quantity} x $${price}`}
       />
       <ListItemSecondaryAction>
-        <IconButton>
+        <IconButton color="primary">
           <ClearIcon />
         </IconButton>
       </ListItemSecondaryAction>

@@ -6,6 +6,7 @@ import { connect } from 'react-redux'
 
 import { useStyles } from './cartDrawer.styles'
 import CartItem from '../cart-item/cartItem.component'
+import { selectCartItems } from '../../redux/cart/cart.selectors'
 
 const CartDropDown = ({ cartItems }) => {
   const classes = useStyles()
@@ -35,8 +36,8 @@ const CartDropDown = ({ cartItems }) => {
   )
 }
 
-const mapDispatchToProps = ({ cart }) => ({
-  cartItems: cart.cartItems,
+const mapDispatchToProps = (state) => ({
+  cartItems: selectCartItems(state),
 })
 
 export default connect(mapDispatchToProps)(CartDropDown)

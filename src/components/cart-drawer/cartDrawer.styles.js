@@ -30,4 +30,11 @@ export const useStyles = makeStyles((theme) => ({
     overflowY: 'auto',
     maxHeight: '88vh',
   },
+  emptyCart: {
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+      height: '86vh'
+  },
+
 }))

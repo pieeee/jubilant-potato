@@ -1,7 +1,10 @@
-import {drawerActionType} from './drawer.action.type'
+import { drawerActionType } from './drawer.action.type'
 
 const initialState = {
-  drawerOpen: false,
+  drawerOpen: {
+    state: false,
+    side: undefined,
+  },
 }
 
 export default (state = initialState, { type, payload }) => {

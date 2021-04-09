@@ -18,8 +18,6 @@ const CartItem = ({ item: { name, imageUrl, price, quantity } }) => {
         <Avatar src={imageUrl} alt={name} variant="rounded" />
       </ListItemAvatar>
       <ListItemText
-        multiline
-        dense
         primary={name}
         secondary={`${quantity} x $${price}`}
       />

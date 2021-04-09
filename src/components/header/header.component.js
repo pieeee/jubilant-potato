@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import {
   AppBar,
   Container,
@@ -8,35 +8,30 @@ import {
   Button,
   Drawer,
 } from '@material-ui/core'
-import withWidth, { isWidthDown, isWidthUp } from '@material-ui/core/withWidth'
+import withWidth, { isWidthDown } from '@material-ui/core/withWidth'
 import MenuIcon from '@material-ui/icons/Menu'
 import clsx from 'clsx'
-
-import { useStyles } from './header.styles'
+import { createStructuredSelector } from 'reselect'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
+import { auth } from '../../firebase/firebase.utils'
 import { setDrawerOpen } from '../../redux/drawer/drawer.actions'
-
-import HideOnScroll from './hideOnScroll'
+import { selectCurrentUser } from '../../redux/user/user.selectors'
+import { selectDrawerOpen } from '../../redux/drawer/drawer.selector'
+import { useStyles } from './header.styles'
 import DrawerItem from '../drawer-item/drawerItem.component'
 import navMenus from './header.data'
 import CartIcon from '../cart-icon/cartIcon.component'
-
-import { auth } from '../../firebase/firebase.utils'
 import CartDropDown from '../cart-drawer/cartDrawer.component'
 
 const Header = (props) => {
-  // component state
-
-  // global
-  const { location, history } = props
   const classes = useStyles()
+  const { location, history } = props
 
   const onSignout = () => {
     auth.signOut()
   }
 
-  // drawer
   const toggleDrawer = (state, side) => (event) => {
     if (
       event.type === 'keydown' &&
@@ -44,7 +39,6 @@ const Header = (props) => {
     ) {
       return
     }
-
     props.setDrawerOpen({ state, side })
   }
 
@@ -127,9 +121,11 @@ const mapDispatchToProps = (dispatch) => ({
   setDrawerOpen: (open) => dispatch(setDrawerOpen(open)),
 })
 
-const mapStateToProps = (state) => ({
-  currentUser: state.user.currentUser,
-  drawerOpen: state.drawer.drawerOpen,
+const mapStateToProps = createStructuredSelector({
+  currentUser: selectCurrentUser,
+  drawerOpen: selectDrawerOpen,
 })
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(withWidth()(Header)))
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(withWidth()(Header))
+)

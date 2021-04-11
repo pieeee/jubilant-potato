@@ -8,21 +8,20 @@ import {
   ListItemText,
 } from '@material-ui/core'
 import ClearIcon from '@material-ui/icons/Clear'
-import { useStyles } from './cartItem.styles'
+import { connect } from 'react-redux'
+import { removeItemFromCart } from '../../redux/cart/cart.actions'
 
-const CartItem = ({ item: { name, imageUrl, price, quantity } }) => {
-  const classes = useStyles()
+const CartItem = ({ item, removeItem }) => {
+  const { name, imageUrl, price, quantity } = item
+
   return (
     <ListItem>
       <ListItemAvatar>
         <Avatar src={imageUrl} alt={name} variant="rounded" />
       </ListItemAvatar>
-      <ListItemText
-        primary={name}
-        secondary={`${quantity} x $${price}`}
-      />
+      <ListItemText primary={name} secondary={`${quantity} x $${price}`} />
       <ListItemSecondaryAction>
-        <IconButton color="primary">
+        <IconButton color="primary" onClick={() => removeItem(item)}>
           <ClearIcon />
         </IconButton>
       </ListItemSecondaryAction>
@@ -30,4 +29,8 @@ const CartItem = ({ item: { name, imageUrl, price, quantity } }) => {
   )
 }
 
-export default CartItem
+const mapDispatchToProps = (dispatch) => ({
+  removeItem: (item) => dispatch(removeItemFromCart(item)),
+})
+
+export default connect(null, mapDispatchToProps)(CartItem)

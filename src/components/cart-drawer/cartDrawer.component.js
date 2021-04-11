@@ -8,6 +8,7 @@ import { useStyles } from './cartDrawer.styles'
 import CartItem from '../cart-item/cartItem.component'
 import { selectCartItems } from '../../redux/cart/cart.selectors'
 
+
 const CartDropDown = ({ cartItems, history, toggleDrawer }) => {
   const classes = useStyles()
   return (

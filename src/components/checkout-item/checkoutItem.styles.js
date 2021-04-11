@@ -1,7 +1,10 @@
 import { makeStyles, withStyles, TableCell, TableRow } from '@material-ui/core'
 
 export const useStyles = makeStyles((theme) => ({
-  //  jss here
+  quantityIcons: {
+    width: '20px',
+    height: '20px',
+  },
 }))
 
 export const StyledTableCell = withStyles((theme) => ({
@@ -10,7 +13,7 @@ export const StyledTableCell = withStyles((theme) => ({
     color: theme.palette.primary.main,
   },
   body: {
-    fontSize: 14,
+    fontSize: 16,
   },
 }))(TableCell)
 

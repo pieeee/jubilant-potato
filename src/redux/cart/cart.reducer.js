@@ -3,6 +3,10 @@ import { addItemToCart, dropItemFromCart } from './cart.utils'
 
 const initialState = {
   cartItems: [],
+  cartItemAddFeedback: {
+    open: false,
+    items: [],
+  },
 }
 
 export default (state = initialState, { type, payload }) => {

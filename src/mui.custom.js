@@ -8,6 +8,10 @@ export const customConfig = {
       main: '#FFFFFF',
       light: '#f8324526',
     },
+    feedback: {
+      main: '#43a047',
+      light: '#66bb6a',
+    },
   },
   breakpoints: {
     values: {

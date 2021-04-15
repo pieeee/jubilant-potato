@@ -12,8 +12,9 @@ import { connect } from 'react-redux'
 import { addItem } from '../../redux/cart/cart.actions'
 
 import { useStyles } from './collectionItem.styles'
+import { addItemToFeedbackQueue } from '../../redux/feedback/feedback.actions'
 
-const CollectionItem = ({ item, addItem }) => {
+const CollectionItem = ({ item, addItem, addItemToFeedbackQueue }) => {
   const { name, imageUrl, price } = item
   const classes = useStyles()
   return (
@@ -40,7 +41,10 @@ const CollectionItem = ({ item, addItem }) => {
         fullWidth
         color="primary"
         variant="contained"
-        onClick={() => addItem(item)}
+        onClick={() => {
+          addItem(item)
+          addItemToFeedbackQueue({ ...item, time: Date.now() })
+        }}
       >
         Add To Cart
       </Button>
@@ -50,6 +54,7 @@ const CollectionItem = ({ item, addItem }) => {
 
 const mapDispatchToProps = (dispatch) => ({
   addItem: (item) => dispatch(addItem(item)),
+  addItemToFeedbackQueue: (item) => dispatch(addItemToFeedbackQueue(item)),
 })
 
 export default connect(null, mapDispatchToProps)(CollectionItem)

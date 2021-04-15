@@ -42,7 +42,7 @@ const CollectionItem = ({ item, addItem, addItemToFeedbackQueue }) => {
         color="primary"
         variant="contained"
         onClick={() => {
-          addItem(item)
+          addItem({ ...item, show: true })
           addItemToFeedbackQueue({ ...item, time: Date.now() })
         }}
       >

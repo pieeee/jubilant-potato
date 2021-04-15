@@ -2,4 +2,5 @@ export const cartActionTypes = {
   ADD_ITEM: 'ADD_ITEM',
   REMOVE_ITEM_FROM_CART: 'REMOVE_ITEM_FROM_CART',
   DROP_ITEM: 'DROP_ITEM',
+  HIDE_ITEM: 'HIDE_ITEM',
 }

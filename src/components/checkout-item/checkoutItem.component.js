@@ -1,8 +1,6 @@
-import { Avatar, IconButton } from '@material-ui/core'
-import React from 'react'
+import { Avatar, IconButton, Slide } from '@material-ui/core'
+import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
-import { createStructuredSelector } from 'reselect'
-import { selectCartItemsTotalPrice } from '../../redux/cart/cart.selectors'
 
 import {
   StyledTableRow,
@@ -17,36 +15,52 @@ import {
   dropItem,
   removeItemFromCart,
   addItem,
+  hideItem,
 } from '../../redux/cart/cart.actions'
 
-const CheckoutItem = ({ cartItem, removeItem, dropItem, addItem }) => {
+const CheckoutItem = ({
+  cartItem,
+  removeItem,
+  dropItem,
+  addItem,
+  hideItem,
+}) => {
   const classes = useStyles()
 
-  const { name, imageUrl, price, quantity } = cartItem
+  const { name, imageUrl, price, quantity, show } = cartItem
+
+  const handleChange = () => {
+    hideItem(cartItem)
+    setTimeout(() => {
+      removeItem(cartItem)
+    }, 300)
+  }
 
   return (
-    <StyledTableRow>
-      <StyledTableCell align="center">
-        <Avatar src={imageUrl} variant="rounded" />
-      </StyledTableCell>
-      <StyledTableCell>{name}</StyledTableCell>
-      <StyledTableCell align="center">$ {price}</StyledTableCell>
-      <StyledTableCell align="center">
-        <IconButton color="primary" onClick={() => dropItem(cartItem)}>
-          <ArrowBackIosIcon className={classes.quantityIcons} />
-        </IconButton>
-        {quantity}
-        <IconButton color="primary" onClick={() => addItem(cartItem)}>
-          <ArrowForwardIosIcon className={classes.quantityIcons} />
-        </IconButton>
-      </StyledTableCell>
-      <StyledTableCell align="center">$ {quantity * price}</StyledTableCell>
-      <StyledTableCell align="center">
-        <IconButton color="primary" onClick={() => removeItem(cartItem)}>
-          <DeleteIcon />
-        </IconButton>
-      </StyledTableCell>
-    </StyledTableRow>
+    <Slide direction="left" timeout={300} in={show}>
+      <StyledTableRow>
+        <StyledTableCell align="center">
+          <Avatar src={imageUrl} variant="rounded" />
+        </StyledTableCell>
+        <StyledTableCell>{name}</StyledTableCell>
+        <StyledTableCell align="center">$ {price}</StyledTableCell>
+        <StyledTableCell align="center">
+          <IconButton color="primary" onClick={() => dropItem(cartItem)}>
+            <ArrowBackIosIcon className={classes.quantityIcons} />
+          </IconButton>
+          {quantity}
+          <IconButton color="primary" onClick={() => addItem(cartItem)}>
+            <ArrowForwardIosIcon className={classes.quantityIcons} />
+          </IconButton>
+        </StyledTableCell>
+        <StyledTableCell align="center">$ {quantity * price}</StyledTableCell>
+        <StyledTableCell align="center">
+          <IconButton color="primary" onClick={() => handleChange()}>
+            <DeleteIcon />
+          </IconButton>
+        </StyledTableCell>
+      </StyledTableRow>
+    </Slide>
   )
 }
 
@@ -54,6 +68,7 @@ const mapDispatchToProps = (dispatch) => ({
   removeItem: (item) => dispatch(removeItemFromCart(item)),
   dropItem: (item) => dispatch(dropItem(item)),
   addItem: (item) => dispatch(addItem(item)),
+  hideItem: (item) => dispatch(hideItem(item)),
 })
 
 export default connect(null, mapDispatchToProps)(CheckoutItem)

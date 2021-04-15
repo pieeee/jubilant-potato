@@ -27,6 +27,14 @@ export default (state = initialState, { type, payload }) => {
           (cartItem) => cartItem.id !== payload.id
         ),
       }
+    case cartActionTypes.HIDE_ITEM: {
+      return {
+        ...state,
+        cartItems: state.cartItems.map((cartItem) =>
+          cartItem.id === payload.id ? { ...cartItem, show: false } : cartItem
+        ),
+      }
+    }
     default:
       return state
   }

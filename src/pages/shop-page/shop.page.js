@@ -7,7 +7,6 @@ import CollectionPage from '../category/collection.page'
 const ShopPage = ({ match }) => {
   const classes = useStyles()
 
-  console.log(match.path)
   return (
     <div>
       <Route exact path={`${match.path}`} component={CollectionOverview} />

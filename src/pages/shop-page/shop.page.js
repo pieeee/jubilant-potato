@@ -1,21 +1,20 @@
-import { Container } from '@material-ui/core'
 import React from 'react'
-import CartFeedback from '../../components/cart-feedback/cartFeedback.component'
-import CollectionPreview from '../../components/collection-preview/collectionPreview.component'
-import { SHOP_DATA } from './shop.data'
+import CollectionOverview from '../../components/collection-overview/collectionOverview.component'
 import { useStyles } from './shop.styles'
+import { Route } from 'react-router-dom'
+import CollectionPage from '../category/collection.page'
 
-const ShopPage = () => {
+const ShopPage = ({ match }) => {
   const classes = useStyles()
 
+  console.log(match.path)
   return (
-    <div className={classes.shopBody}>
-      <Container>
-        <CartFeedback />
-        {SHOP_DATA.map(({ id, ...props }) => (
-          <CollectionPreview key={id} {...props} />
-        ))}
-      </Container>
+    <div>
+      <Route exact path={`${match.path}`} component={CollectionOverview} />
+      <Route
+        path={`${match.path}/:collectionUrlParam`}
+        component={CollectionPage}
+      />
     </div>
   )
 }

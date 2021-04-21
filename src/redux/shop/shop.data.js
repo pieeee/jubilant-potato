@@ -71,7 +71,7 @@ export const SHOP_DATA = [
   },
   {
     id: 2,
-    title: 'CPU',
+    title: 'Processors',
     routeName: 'cpu',
     items: [
       {
@@ -134,7 +134,7 @@ export const SHOP_DATA = [
   },
   {
     id: 3,
-    title: 'GPU',
+    title: 'Graphics Card',
     routeName: 'gpu',
     items: [
       {
@@ -176,8 +176,8 @@ export const SHOP_DATA = [
   },
   {
     id: 4,
-    title: 'PSU',
-    routeName: '/psu',
+    title: 'Power Supply',
+    routeName: 'psu',
     items: [
       {
         id: 23,
@@ -232,7 +232,7 @@ export const SHOP_DATA = [
   },
   {
     id: 5,
-    title: 'SSD',
+    title: 'Storage (SSD)',
     routeName: 'ssd',
     items: [
       {
@@ -281,7 +281,7 @@ export const SHOP_DATA = [
   },
   {
     id: 6,
-    title: 'RAM',
+    title: 'MEMORY',
     routeName: 'ram',
     items: [
       {

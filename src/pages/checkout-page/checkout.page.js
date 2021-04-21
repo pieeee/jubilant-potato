@@ -21,6 +21,7 @@ import {
 } from '../../redux/cart/cart.selectors'
 import CheckoutItem from '../../components/checkout-item/checkoutItem.component'
 import { tableHeadItems } from './checkout.data'
+import StripeButton from '../../components/stripe-button/stripeButton.component'
 
 const CheckoutPage = ({ cartItems, totalPrice, itemCount }) => {
   const classes = useStyles()
@@ -85,19 +86,20 @@ const CheckoutPage = ({ cartItems, totalPrice, itemCount }) => {
         <Table className={classes.table} aria-label="customized table">
           {renderTableHead}
           {cartItems.length ? (
-            <>
+            <React.Fragment>
               <TableBody>
                 {cartItems.map((cartItem) => (
                   <CheckoutItem key={cartItem.id} cartItem={cartItem} />
                 ))}
               </TableBody>
               {renderTableFooter}
-            </>
+            </React.Fragment>
           ) : (
             renderEmptyCartMessage
           )}
         </Table>
       </TableContainer>
+      {totalPrice ? <StripeButton price={totalPrice} /> : null}
     </Container>
   )
 }

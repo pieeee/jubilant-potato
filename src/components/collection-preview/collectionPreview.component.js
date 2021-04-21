@@ -6,7 +6,6 @@ import { withRouter } from 'react-router-dom'
 
 const CollectionPreview = ({ title, items, history, match, routeName }) => {
   const classes = useStyles()
-  console.log(match)
   return (
     <Card className={classes.CollectionPreview} elevation={0}>
       <Card className={classes.title} elevation={0}>

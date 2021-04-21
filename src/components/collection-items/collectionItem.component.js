@@ -15,7 +15,7 @@ import { useStyles } from './collectionItem.styles'
 import { addItemToFeedbackQueue } from '../../redux/feedback/feedback.actions'
 
 const CollectionItem = ({ item, addItem, addItemToFeedbackQueue }) => {
-  const { name, imageUrl, price } = item
+  const { name, imageUrl, price, } = item
   const classes = useStyles()
   return (
     <Card className={classes.root} elevation={0}>

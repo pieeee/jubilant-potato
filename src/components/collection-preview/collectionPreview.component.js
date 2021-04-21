@@ -1,20 +1,22 @@
-import { Typography, Box, Link, Grid } from '@material-ui/core'
+import { Typography, Box, Link, Grid, Card } from '@material-ui/core'
 import React from 'react'
 import CollectionItem from '../collection-items/collectionItem.component'
 import { useStyles } from './collectionPreview.styles'
+import { withRouter } from 'react-router-dom'
 
-const CollectionPreview = ({ title, items }) => {
+const CollectionPreview = ({ title, items, history, match, routeName }) => {
   const classes = useStyles()
+  console.log(match)
   return (
-    <div className={classes.CollectionPreview}>
-      <Box
-        display="flex"
-        justifyContent="space-between"
-        style={{ padding: '16px 0' }}
-      >
-        <Typography variant="h5">{title.toUpperCase()}</Typography>
-        <Link href="#">See All</Link>
-      </Box>
+    <Card className={classes.CollectionPreview} elevation={0}>
+      <Card className={classes.title} elevation={0}>
+        <Typography variant="h5" color="primary">
+          {title.toUpperCase()}
+        </Typography>
+        <Link onClick={() => history.push(`${match.path}/${routeName}`)}>
+          See All
+        </Link>
+      </Card>
       <Grid container spacing={2}>
         {items
           .filter(({}, idx) => idx < 4)
@@ -24,8 +26,8 @@ const CollectionPreview = ({ title, items }) => {
             </Grid>
           ))}
       </Grid>
-    </div>
+    </Card>
   )
 }
 
-export default CollectionPreview
+export default withRouter(CollectionPreview)

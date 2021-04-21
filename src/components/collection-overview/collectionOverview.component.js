@@ -5,11 +5,13 @@ import { createStructuredSelector } from 'reselect'
 import { selectShopCollections } from '../../redux/shop/shop.selector'
 import CartFeedback from '../cart-feedback/cartFeedback.component'
 import CollectionPreview from '../collection-preview/collectionPreview.component'
+import PageTitle from '../page-title/pageTitle.component'
 
 const CollectionOverview = ({ collections }) => {
   return (
     <Container>
-      <CartFeedback />
+          <CartFeedback />
+          <PageTitle>ALL COMPONENTS</PageTitle>
       {collections.map(({ id, ...props }) => (
         <CollectionPreview key={id} {...props} />
       ))}

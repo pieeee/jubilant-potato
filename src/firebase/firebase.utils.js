@@ -1,6 +1,7 @@
 import firebase from 'firebase/app'
 import 'firebase/auth'
 import 'firebase/firestore'
+import _ from 'lodash'
 
 const config = {
   apiKey: 'AIzaSyDhUQs3cTIHTVY8q0rcl_cyFgx3kYsU8II',
@@ -36,6 +37,45 @@ export const createUserProfileDocument = async (userAuth, addiTionalData) => {
     }
   }
   return userRef
+}
+
+export const addCollectionAndDocuments = async (
+  collectionKey,
+  objectsToAdd
+) => {
+  const collectionRef = firestore.collection(collectionKey)
+  const batch = firestore.batch()
+
+  objectsToAdd.forEach((obj) => {
+    const newDocRef = collectionRef.doc()
+    batch.set(newDocRef, obj)
+  })
+
+  return await batch.commit()
+}
+
+export const collectionSnapshotToMap = (collections) => {
+  const convertToRouteName = (title) =>
+    title
+      .replace(/\s/g, '_')
+      .replace(/[{()}]/g, '')
+      .toLowerCase()
+
+  const transCollection = collections.docs.map((doc) => {
+    const { title, items } = doc.data()
+
+    return {
+      id: doc.id,
+      routeName: convertToRouteName(title),
+      title,
+      items,
+    }
+  })
+
+  return transCollection.reduce((accumulator, collection) => {
+    accumulator[collection.routeName] = collection
+    return accumulator
+  }, {})
 }
 
 const provider = new firebase.auth.GoogleAuthProvider()

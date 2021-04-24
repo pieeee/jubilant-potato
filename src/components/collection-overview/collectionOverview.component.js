@@ -12,7 +12,7 @@ const CollectionOverview = ({ collections }) => {
     <Container>
           <CartFeedback />
           <PageTitle>ALL COMPONENTS</PageTitle>
-      {collections.map(({ id, ...props }) => (
+      {Object.values(collections).map(({ id, ...props }) => (
         <CollectionPreview key={id} {...props} />
       ))}
     </Container>

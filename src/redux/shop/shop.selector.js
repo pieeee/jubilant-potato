@@ -12,8 +12,5 @@ const selectCollectionUrlParam = ({}, { match }) =>
 
 export const selectCollection = createSelector(
   [selectShopCollections, selectCollectionUrlParam],
-  (collections, collectionUrlParam) =>
-    collections.find(
-      (collection) => collection.routeName === collectionUrlParam
-    )
+  (collections, collectionUrlParam) => collections[collectionUrlParam]
 )

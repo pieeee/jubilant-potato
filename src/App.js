@@ -1,11 +1,6 @@
 import React, { useEffect } from 'react'
 import { Route, Switch, Redirect } from 'react-router-dom'
-import {
-  createMuiTheme,
-  CssBaseline,
-  Snackbar,
-  ThemeProvider,
-} from '@material-ui/core'
+import { createMuiTheme, CssBaseline, ThemeProvider } from '@material-ui/core'
 import { auth, createUserProfileDocument } from './firebase/firebase.utils'
 import { connect } from 'react-redux'
 import HomePage from './pages/home-page/home.page'
@@ -17,7 +12,6 @@ import { selectCurrentUser } from './redux/user/user.selectors'
 import { createStructuredSelector } from 'reselect'
 import { customConfig } from './mui.custom'
 import CheckoutPage from './pages/checkout-page/checkout.page'
-
 
 function App(props) {
   const { setCurrentUser, currentUser } = props

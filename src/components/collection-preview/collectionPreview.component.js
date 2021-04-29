@@ -6,8 +6,9 @@ import { withRouter } from 'react-router-dom'
 
 const CollectionPreview = ({ title, items, history, match, routeName }) => {
   const classes = useStyles()
+
   return (
-    <Card className={classes.CollectionPreview} elevation={0}>
+    <div className={classes.CollectionPreview}>
       <Card className={classes.title} elevation={0}>
         <Typography variant="h5" color="primary">
           {title.toUpperCase()}
@@ -25,7 +26,7 @@ const CollectionPreview = ({ title, items, history, match, routeName }) => {
             </Grid>
           ))}
       </Grid>
-    </Card>
+    </div>
   )
 }
 

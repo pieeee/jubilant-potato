@@ -82,7 +82,7 @@ const Header = (props) => {
             className={classes.title}
             onClick={() => history.push('/')}
           >
-            Jubilant
+            JUBILANT
           </Typography>
 
           <Box display="flex" alignItems="center">

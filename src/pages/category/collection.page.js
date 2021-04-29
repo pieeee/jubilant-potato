@@ -10,7 +10,7 @@ import PageTitle from '../../components/page-title/pageTitle.component'
 const CollectionPage = ({ match, collection }) => {
   const classes = useStyles()
 
-  console.log(collection)
+
   return (
     <Container className={classes.container}>
       <CartFeedback />

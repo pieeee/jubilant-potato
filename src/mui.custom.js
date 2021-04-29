@@ -1,7 +1,7 @@
 export const customConfig = {
   palette: {
     primary: {
-      main: '#262239',
+      main: '#212121',
       light: '#f1f5ff',
     },
     secondary: {

@@ -8,24 +8,21 @@ import {
   collectionSnapshotToMap as snapshotToMap,
 } from '../../firebase/firebase.utils'
 import { connect } from 'react-redux'
-import { updateCollections } from '../../redux/shop/shop.action'
 import WithSpinner from '../../components/with-spinner/with-spinner.component'
+import { createStructuredSelector } from 'reselect'
+import { selectIsFetching } from '../../redux/shop/shop.selector'
+import {fetchCollectionsStartAsync} from '../../redux/shop/shop.action'
 
 const CollectionOverviewWithSpinner = WithSpinner(CollectionOverview)
 const CollectionPageWithSpinner = WithSpinner(CollectionPage)
 
-const ShopPage = ({ match, updateCollections }) => {
+const ShopPage = ({ match, isFetching, fetchCollections }) => {
   const classes = useStyles()
 
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
-    const collectionRef = firestore.collection('collections')
-    collectionRef.onSnapshot(async (snapshot) => {
-      const collectionMap = await snapshotToMap(snapshot)
-      updateCollections(collectionMap)
-      setIsLoading(false)
-    })
+    fetchCollections()
   }, [])
 
   return (
@@ -34,21 +31,25 @@ const ShopPage = ({ match, updateCollections }) => {
         exact
         path={`${match.path}`}
         render={(props) => (
-          <CollectionOverviewWithSpinner isLoading={isLoading} {...props} />
+          <CollectionOverviewWithSpinner isLoading={isFetching} {...props} />
         )}
       />
       <Route
         path={`${match.path}/:collectionUrlParam`}
         render={(props) => (
-          <CollectionPageWithSpinner isLoading={isLoading} {...props} />
+          <CollectionPageWithSpinner isLoading={isFetching} {...props} />
         )}
       />
     </div>
   )
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  updateCollections: (payload) => dispatch(updateCollections(payload)),
+const mapStateToProps = createStructuredSelector({
+  isFetching: selectIsFetching,
 })
 
-export default connect(null, mapDispatchToProps)(ShopPage)
+const mapDispatchToProps = (dispatch) => ({
+  fetchCollections: () => dispatch(fetchCollectionsStartAsync()),
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(ShopPage)

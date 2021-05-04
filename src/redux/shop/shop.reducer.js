@@ -1,9 +1,9 @@
 import { shopActionTypes } from './shop.action.types'
-import { SHOP_DATA } from './shop.data'
+
 
 const initialState = {
-  isFetching: false,
-  collections: {},
+  isFetching: true,
+  collections: null,
   errorMessage: undefined,
 }
 

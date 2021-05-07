@@ -12,10 +12,10 @@ import { connect } from 'react-redux'
 import { addItem } from '../../redux/cart/cart.actions'
 
 import { useStyles } from './collectionItem.styles'
-import { addItemToFeedbackQueue } from '../../redux/feedback/feedback.actions'
+import { showFeedback } from '../../redux/feedback/feedback.actions'
 
-const CollectionItem = ({ item, addItem, addItemToFeedbackQueue }) => {
-  const { name, imageUrl, price, } = item
+const CollectionItem = ({ item, addItem, showFeedback }) => {
+  const { name, imageUrl, price } = item
   const classes = useStyles()
   return (
     <Card className={classes.root} elevation={0}>
@@ -43,7 +43,7 @@ const CollectionItem = ({ item, addItem, addItemToFeedbackQueue }) => {
         variant="contained"
         onClick={() => {
           addItem({ ...item, show: true })
-          addItemToFeedbackQueue({ ...item, time: Date.now() })
+          showFeedback(item)
         }}
       >
         Add To Cart
@@ -54,7 +54,7 @@ const CollectionItem = ({ item, addItem, addItemToFeedbackQueue }) => {
 
 const mapDispatchToProps = (dispatch) => ({
   addItem: (item) => dispatch(addItem(item)),
-  addItemToFeedbackQueue: (item) => dispatch(addItemToFeedbackQueue(item)),
+  showFeedback: (item) => dispatch(showFeedback(item)),
 })
 
 export default connect(null, mapDispatchToProps)(CollectionItem)

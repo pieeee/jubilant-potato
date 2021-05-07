@@ -2,12 +2,12 @@ import { createSelector } from 'reselect'
 
 const selectFeedback = (state) => state.feedback
 
-export const selectFeedbackQueue = createSelector(
+export const selectFeedbackItem = createSelector(
   [selectFeedback],
-  (feedback) => feedback.feedbackQueue
+  (feedback) => feedback.item
 )
 
-export const selectRenderFeedback = createSelector(
+export const selectFeedbackShow = createSelector(
   [selectFeedback],
-  (feedback) => feedback.renderFeedback
+  (feedback) => feedback.show
 )

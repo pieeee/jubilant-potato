@@ -1,16 +1,15 @@
 import { feedbackActionTypes } from './feedback.action.types'
 
-export const addItemToFeedbackQueue = (payload) => ({
-  type: feedbackActionTypes.ADD_ITEM_TO_FEEDBACK_QUEUE,
+export const showFeedback = (payload) => ({
+  type: feedbackActionTypes.SHOW_FEEDBACK,
   payload,
 })
 
-export const removeItemfromFeedbackQueue = (payload) => ({
-  type: feedbackActionTypes.REMOVE_ITEM_FROM_FEEDBACK_QUEUE,
+export const addItemToFeedback = (payload) => ({
+  type: feedbackActionTypes.ADD_FEEDBACK,
   payload,
 })
 
-export const renderFeedback = (payload) => ({
-  type: feedbackActionTypes.RENDER_FEEDBACK,
-  payload,
+export const closeFeedback = () => ({
+  type: feedbackActionTypes.CLOSE_FEEDBACK,
 })

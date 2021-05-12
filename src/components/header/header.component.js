@@ -19,6 +19,7 @@ import { setDrawerOpen } from '../../redux/drawer/drawer.actions'
 import { selectCurrentUser } from '../../redux/user/user.selectors'
 import { selectDrawerOpen } from '../../redux/drawer/drawer.selector'
 import { useStyles } from './header.styles'
+import { signoutStart } from '../../redux/user/user.actions'
 import DrawerItem from '../drawer-item/drawerItem.component'
 import navMenus from './header.data'
 import CartIcon from '../cart-icon/cartIcon.component'
@@ -26,11 +27,7 @@ import CartDropDown from '../cart-drawer/cartDrawer.component'
 
 const Header = (props) => {
   const classes = useStyles()
-  const { location, history } = props
-
-  const onSignout = () => {
-    auth.signOut()
-  }
+  const { location, history, signoutStart } = props
 
   const toggleDrawer = (state, side) => (event) => {
     if (
@@ -43,7 +40,7 @@ const Header = (props) => {
   }
 
   return (
-    <>
+    <React.Fragment>
       <Drawer
         anchor="left"
         open={props.drawerOpen.side === 'left' ? props.drawerOpen.state : false}
@@ -52,7 +49,7 @@ const Header = (props) => {
         <DrawerItem
           toggleDrawer={toggleDrawer()}
           currentUser={props.currentUser}
-          onSignout={onSignout}
+          onSignout={signoutStart}
         />
       </Drawer>
 
@@ -99,9 +96,7 @@ const Header = (props) => {
                     [classes.buttonSelected]: location.pathname === path,
                   })}
                   onClick={
-                    name !== 'Signout'
-                      ? () => history.push(path)
-                      : () => onSignout()
+                    name !== 'Signout' ? () => history.push(path) : signoutStart
                   }
                   key={idx}
                 >
@@ -113,12 +108,13 @@ const Header = (props) => {
           {isWidthDown('sm', props.width) && <CartIcon />}
         </Container>
       </AppBar>
-    </>
+    </React.Fragment>
   )
 }
 
 const mapDispatchToProps = (dispatch) => ({
   setDrawerOpen: (open) => dispatch(setDrawerOpen(open)),
+  signoutStart: () => dispatch(signoutStart()),
 })
 
 const mapStateToProps = createStructuredSelector({

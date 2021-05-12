@@ -18,8 +18,8 @@ const CartFeedback = ({ feedback, show }) => {
         <Card elevation={6} color="success" className={classes.root}>
           <CheckCircleOutlineIcon />
           <Typography variant="body2">
-            <strong>{feedback !== undefined ? feedback.name : null}</strong>
-            is added to the cart
+            <strong>{feedback !== undefined ? feedback.name : null}</strong> is
+            added to the cart
           </Typography>
         </Card>
       </Slide>

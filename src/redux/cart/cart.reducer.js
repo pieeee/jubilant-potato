@@ -35,6 +35,11 @@ export default (state = initialState, { type, payload }) => {
         ),
       }
     }
+    case cartActionTypes.CLEAR_CART:
+      return {
+        ...state,
+        cartItems: [],
+      }
     default:
       return state
   }

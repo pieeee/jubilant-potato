@@ -7,31 +7,19 @@ import HomePage from './pages/home-page/home.page'
 import ShopPage from './pages/shop-page/shop.page'
 import Authentication from './pages/auth-page/auth.page'
 import Header from './components/header/header.component'
-import { setCurrentUser } from './redux/user/user.actions'
+import { checkUserSession } from './redux/user/user.actions'
 import { selectCurrentUser } from './redux/user/user.selectors'
 import { createStructuredSelector } from 'reselect'
 import { customConfig } from './mui.custom'
 import CheckoutPage from './pages/checkout-page/checkout.page'
 
 function App(props) {
-  const { setCurrentUser, currentUser } = props
+  const { checkUserSession, currentUser } = props
 
   const theme = createMuiTheme(customConfig)
 
   useEffect(() => {
-    auth.onAuthStateChanged(async (userAuth) => {
-      const userRef = await createUserProfileDocument(userAuth)
-      if (userRef) {
-        userRef.onSnapshot((snapShot) => {
-          setCurrentUser({
-            id: snapShot.id,
-            ...snapShot.data(),
-          })
-        })
-      } else {
-        setCurrentUser(userAuth)
-      }
-    })
+    checkUserSession()
   }, [])
 
   return (
@@ -62,7 +50,7 @@ const mapStateToProps = createStructuredSelector({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  setCurrentUser: (user) => dispatch(setCurrentUser(user)),
+  checkUserSession: () => dispatch(checkUserSession()),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(App)

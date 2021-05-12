@@ -19,3 +19,7 @@ export const hideItem = (payload) => ({
   type: cartActionTypes.HIDE_ITEM,
   payload,
 })
+
+export const clearCart = () => ({
+  type: cartActionTypes.CLEAR_CART,
+})

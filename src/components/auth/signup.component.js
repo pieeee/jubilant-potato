@@ -11,6 +11,8 @@ import { useForm, Controller } from 'react-hook-form'
 import { auth, createUserProfileDocument } from '../../firebase/firebase.utils'
 
 import { useStyles } from './auth-component.styles'
+import { connect } from 'react-redux'
+import { signupStart } from '../../redux/user/user.actions'
 
 const Signup = (props) => {
   const classes = useStyles()
@@ -28,18 +30,18 @@ const Signup = (props) => {
 
   // form on submit
   const onSubmit = async (data) => {
-    const { displayName, email, password } = data
-    console.log(displayName)
-    try {
-      const { user } = await auth.createUserWithEmailAndPassword(
-        email,
-        password
-      )
+    props.signupStart(data)
+    // const { displayName, email, password } = data
+    // try {
+    //   const { user } = await auth.createUserWithEmailAndPassword(
+    //     email,
+    //     password
+    //   )
 
-      await createUserProfileDocument(user, { displayName })
-    } catch (error) {
-      console.log(error)
-    }
+    //   await createUserProfileDocument(user, { displayName })
+    // } catch (error) {
+    //   console.log(error)
+    // }
     reset()
   }
 
@@ -176,4 +178,8 @@ const Signup = (props) => {
   )
 }
 
-export default Signup
+const mapDispatchToProps = (dispatch) => ({
+  signupStart: (signupData) => dispatch(signupStart(signupData)),
+})
+
+export default connect(null, mapDispatchToProps)(Signup)

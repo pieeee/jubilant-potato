@@ -11,6 +11,11 @@ import { ReactComponent as GoogleIcons } from './google.svg'
 import { useForm, Controller } from 'react-hook-form'
 import { signinWithGoogle, auth } from '../../firebase/firebase.utils'
 import { useStyles } from './auth-component.styles'
+import { connect } from 'react-redux'
+import {
+  googleSigninStart,
+  emailSigninStart,
+} from '../../redux/user/user.actions'
 
 const Signin = (props) => {
   const classes = useStyles()
@@ -18,7 +23,7 @@ const Signin = (props) => {
 
   // form on submit
   const onSubmit = async ({ email, password }) => {
-    await auth.signInWithEmailAndPassword(email, password)
+    await props.emailSigninStart(email, password)
     reset()
   }
 
@@ -108,7 +113,7 @@ const Signin = (props) => {
               variant="contained"
               fullWidth
               startIcon={<GoogleIcons />}
-              onClick={signinWithGoogle}
+              onClick={props.googleSigninStart}
             >
               Signin With Google
             </Button>
@@ -119,4 +124,10 @@ const Signin = (props) => {
   )
 }
 
-export default Signin
+const mapDispatchToProps = (dispatch) => ({
+  googleSigninStart: () => dispatch(googleSigninStart()),
+  emailSigninStart: (email, password) =>
+    dispatch(emailSigninStart({ email, password })),
+})
+
+export default connect(null, mapDispatchToProps)(Signin)

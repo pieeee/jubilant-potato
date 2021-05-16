@@ -3,6 +3,7 @@ import React from 'react'
 import StripeCheckout from 'react-stripe-checkout'
 import { useStyles } from './stripeButton.styles'
 import PaymentIcon from '@material-ui/icons/Payment'
+import axios from 'axios'
 
 const StripeButton = ({ price }) => {
   const classes = useStyles()
@@ -11,7 +12,18 @@ const StripeButton = ({ price }) => {
   const publishableKey =
     'pk_test_51IWkh7FpObJBwKpDLobxkKX1ja9A5P8NSEKCbrXo1nQ2squM50hH4Ci3UIp1TOwZmkIydEJB5S6urku3kjguHDiC007zApE4IC'
 
-  const onToken = (token) => console.log(token)
+  const onToken = (token) => {
+    axios
+      .post('/payment', {
+        amount: priceForStripe,
+        token,
+      })
+      .then((res) => alert('Payment Successfull'))
+      .catch((err) => {
+        console.log(err)
+        alert('Payment Failed')
+      })
+  }
 
   return (
     <div className={classes.buttonContainer}>

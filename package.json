@@ -15,7 +15,7 @@
     "build": "cd client && npm run build",
     "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\"",
     "start": "node server.js",
-    "heroku-postbuild": "cd client && npm install && npm install --only=dev --no-shrinkwrap && npm run build"
+    "heroku-postbuild": "cd client && npm install && npm run build"
   },
   "dependencies": {
     "compression": "^1.7.4",

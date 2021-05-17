@@ -5,5 +5,6 @@
 
 Live: https://jubilant-tech.herokuapp.com/
 
-
-![](https://ibb.co/qr9xtWb)
+<p align="center">
+<img src='https://github.com/pieeee/jubilant-potato/blob/development/Hnet-image.gif'/>
+</center>
